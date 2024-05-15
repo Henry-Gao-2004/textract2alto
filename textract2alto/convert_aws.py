@@ -4,24 +4,28 @@ import os
 import subprocess
 
 def convert(response_path: str, img_path: str):
+    convert_complex(response_path, img_path, '4.2', True, False, False, False, True, True, 0, 'first', 'document', 'document', 'LastChange')
+
+def convert_complex(response_path, img_path, alto_version, check_words, check_border, skip_empty_lines, trailing_dash_to_hyp, dummy_textline, dummy_word, 
+         textequiv_index, textequiv_fallback_strategy, region_order, textline_order, timestamp_src):
     #convert response to page xml
     convert_file(response_path, img_path, "tmp.xml")
 
     # convert page xml to alto xml
     converter = OcrdPageAltoConverter(
-        alto_version='4.2',
+        alto_version=alto_version,
         page_filename="tmp.xml",
-        check_words=True,
-        timestamp_src='LastChange',
-        check_border=False,
-        skip_empty_lines=False,
-        trailing_dash_to_hyp=False,
-        dummy_textline=True,
-        dummy_word=True,
-        textequiv_index=0,
-        textequiv_fallback_strategy='first',
-        region_order='document',
-        textline_order='document'
+        check_words=check_words,
+        timestamp_src=timestamp_src,
+        check_border=check_border,
+        skip_empty_lines=skip_empty_lines,
+        trailing_dash_to_hyp=trailing_dash_to_hyp,
+        dummy_textline=dummy_textline,
+        dummy_word=dummy_word,
+        textequiv_index=textequiv_index,
+        textequiv_fallback_strategy=textequiv_fallback_strategy,
+        region_order=region_order,
+        textline_order=textline_order
     )
     converter.convert()
     with open(img_path+".xml", 'w') as output:
