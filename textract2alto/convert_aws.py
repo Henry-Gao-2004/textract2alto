@@ -4,12 +4,12 @@ import os
 import subprocess
 
 def convert(response_path: str, img_path: str):
-    convert_complex(response_path, img_path, '4.2', True, False, False, False, True, True, 0, 'first', 'document', 'document', 'LastChange')
+    convert_complex(img_path, '4.2', True, False, False, False, True, True, 0, 'first', 'document', 'document', 'LastChange')
 
-def convert_complex(response_path, img_path, alto_version, check_words, check_border, skip_empty_lines, trailing_dash_to_hyp, dummy_textline, dummy_word, 
+def convert_complex(img_path, alto_version, check_words, check_border, skip_empty_lines, trailing_dash_to_hyp, dummy_textline, dummy_word, 
          textequiv_index, textequiv_fallback_strategy, region_order, textline_order, timestamp_src):
     #convert response to page xml
-    convert_file(response_path, img_path, "tmp.xml")
+    convert_file(img_path+".json", img_path, "tmp.xml")
 
     # convert page xml to alto xml
     converter = OcrdPageAltoConverter(
@@ -37,4 +37,4 @@ def convert_complex(response_path, img_path, alto_version, check_words, check_bo
 
 
 if __name__ == '__main__':
-    convert("../resources/1926-Nakcok-UTL-0234.jpg.json", "../resources/1926-Nakcok-UTL-0234.jpg")
+    convert("../resources/1926-Nakcok-UTL-0234.jpg")
