@@ -1,0 +1,21 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=65.5.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "textract2alto"
+version = "0.1.0"
+description = "A CLI application that converts Textract response to ALTO XML."
+readme = "README.md"
+authors = [{ name = "Henry Gao", email = "henrygao04@gmail.com" }]
+dependencies = [
+    "click",
+    "textract2page",
+    "ocrd_page_to_alto",
+    "setuptools"
+]
+
+[project.scripts]
+textract2alto = "textract2alto.cli:cli"
