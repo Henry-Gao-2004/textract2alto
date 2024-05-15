@@ -2,12 +2,17 @@ from textract2page import convert_file
 from ocrd_page_to_alto.convert import OcrdPageAltoConverter 
 import os
 import subprocess
+import logging
 
 def convert(response_path: str, img_path: str):
     convert_complex(img_path, '4.2', True, False, False, False, True, True, 0, 'first', 'document', 'document', 'LastChange')
 
 def convert_complex(img_path, alto_version, check_words, check_border, skip_empty_lines, trailing_dash_to_hyp, dummy_textline, dummy_word, 
          textequiv_index, textequiv_fallback_strategy, region_order, textline_order, timestamp_src):
+    # suppress the logging
+    logger = logging.getLogger('my-logger')
+    logger.propagate = False
+
     #convert response to page xml
     convert_file(img_path+".json", img_path, "tmp.xml")
 
